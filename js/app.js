@@ -1,5 +1,5 @@
 /**
- * AI 公益中转站导航 - 核心应用逻辑
+ * AI 公益中转站导航 - 核心应用逻辑 (旗舰进化版)
  * 纯原生现代化 ES6+ 编写，轻量高效，零外部依赖
  */
 
@@ -28,6 +28,7 @@
     sortSelect: document.getElementById('sortSelect'),
     cardsContainer: document.getElementById('cardsContainer'),
     emptyState: document.getElementById('emptyState'),
+    comparisonTableBody: document.getElementById('comparisonTableBody'),
     toastContainer: document.getElementById('toastContainer'),
     backToTopBtn: document.getElementById('backToTopBtn'),
     clientGuideTabs: document.getElementById('clientGuideTabs'),
@@ -44,9 +45,8 @@
     checkNoticeModal();
   }
 
-  // ===== 数据加载 (支持 fetch 与本地变量双重保险) =====
+  // ===== 数据加载 =====
   async function loadData() {
-    // 默认使用 window 中的 fallback 数据
     CONFIG = window.DEFAULT_CONFIG || {};
     SITES = window.DEFAULT_SITES || [];
 
@@ -62,7 +62,7 @@
     }
   }
 
-  // ===== 主题切换 (深色 / 浅色) =====
+  // ===== 主题切换 =====
   function initTheme() {
     const savedTheme = localStorage.getItem('theme_preference') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -96,19 +96,19 @@
     els.heroStats.innerHTML = `
       <div class="stat-card">
         <div class="stat-value primary">${totalSites}</div>
-        <div class="stat-label">收录精选站点</div>
+        <div class="stat-label">精选中转站</div>
       </div>
       <div class="stat-card">
         <div class="stat-value success">${activeSites}</div>
-        <div class="stat-label">100% 稳定可用</div>
+        <div class="stat-label">100% 极速可用</div>
       </div>
       <div class="stat-card">
         <div class="stat-value warning">$${totalBonusVal}+</div>
-        <div class="stat-label">累计可领额度</div>
+        <div class="stat-label">累计白嫖启动金</div>
       </div>
       <div class="stat-card">
         <div class="stat-value purple">$${totalDailyVal}+/天</div>
-        <div class="stat-label">每日签到领额</div>
+        <div class="stat-label">每日签到送额</div>
       </div>
     `;
   }
@@ -118,25 +118,25 @@
     if (!els.filterTabs) return;
 
     const tabs = [
-      { key: 'all', label: '🔥 全部推荐' },
-      { key: 'daily', label: '⚡ 每日签到' },
-      { key: 'high-bonus', label: '💰 豪华大额度' },
-      { key: 'coding', label: '💻 编程/开发' },
-      { key: 'multimodal', label: '🔮 生图/多模态' }
+      { key: 'all', label: '🔥 全部精选' },
+      { key: 'gpt-5-6', label: '⚡ gpt-5.6-sol' },
+      { key: 'claude-5', label: '👑 claude-opus-5' },
+      { key: 'coding', label: '🛠️ 1:1无虚标/编程' },
+      { key: 'daily', label: '🎁 每日签到' }
     ];
 
     els.filterTabs.innerHTML = tabs.map(tab => {
       let count = 0;
       if (tab.key === 'all') {
         count = SITES.length;
-      } else if (tab.key === 'daily') {
-        count = SITES.filter(s => hasTag(s, '每日签到') || s.dailyValue > 0).length;
-      } else if (tab.key === 'high-bonus') {
-        count = SITES.filter(s => (s.bonusValue || 0) >= 120).length;
+      } else if (tab.key === 'gpt-5-6') {
+        count = SITES.filter(s => hasTagOrModel(s, 'gpt-5.6')).length;
+      } else if (tab.key === 'claude-5') {
+        count = SITES.filter(s => hasTagOrModel(s, 'claude-opus-5') || hasTagOrModel(s, 'claude-5')).length;
       } else if (tab.key === 'coding') {
-        count = SITES.filter(s => hasTag(s, '编程') || hasTag(s, '开发') || hasTag(s, '低延迟')).length;
-      } else if (tab.key === 'multimodal') {
-        count = SITES.filter(s => hasTag(s, '生图') || hasTag(s, '多模态')).length;
+        count = SITES.filter(s => hasTagOrModel(s, '1:1') || hasTagOrModel(s, '编程') || hasTagOrModel(s, '开发')).length;
+      } else if (tab.key === 'daily') {
+        count = SITES.filter(s => hasTagOrModel(s, '每日签到') || s.dailyValue > 0).length;
       }
 
       const isActive = currentFilter === tab.key ? 'active' : '';
@@ -148,7 +148,6 @@
       `;
     }).join('');
 
-    // 绑定点击事件
     els.filterTabs.querySelectorAll('.filter-tab').forEach(btn => {
       btn.addEventListener('click', () => {
         currentFilter = btn.dataset.filter;
@@ -158,28 +157,28 @@
     });
   }
 
-  // 辅助函数：判断是否有某标签
-  function hasTag(site, keyword) {
-    if (!site.tags || !Array.isArray(site.tags)) return false;
-    return site.tags.some(t => t.includes(keyword));
+  function hasTagOrModel(site, keyword) {
+    const kw = keyword.toLowerCase();
+    const tagMatch = (site.tags || []).some(t => t.toLowerCase().includes(kw));
+    const modelMatch = (site.models || []).some(m => m.toLowerCase().includes(kw));
+    const descMatch = (site.desc || '').toLowerCase().includes(kw);
+    return tagMatch || modelMatch || descMatch;
   }
 
   // ===== 卡片列表过滤与排序 =====
   function getFilteredAndSortedSites() {
     let list = [...SITES];
 
-    // 1. 标签过滤
-    if (currentFilter === 'daily') {
-      list = list.filter(s => hasTag(s, '每日签到') || s.dailyValue > 0);
-    } else if (currentFilter === 'high-bonus') {
-      list = list.filter(s => (s.bonusValue || 0) >= 120);
+    if (currentFilter === 'gpt-5-6') {
+      list = list.filter(s => hasTagOrModel(s, 'gpt-5.6'));
+    } else if (currentFilter === 'claude-5') {
+      list = list.filter(s => hasTagOrModel(s, 'claude-opus-5') || hasTagOrModel(s, 'claude-5'));
     } else if (currentFilter === 'coding') {
-      list = list.filter(s => hasTag(s, '编程') || hasTag(s, '开发') || hasTag(s, '低延迟'));
-    } else if (currentFilter === 'multimodal') {
-      list = list.filter(s => hasTag(s, '生图') || hasTag(s, '多模态'));
+      list = list.filter(s => hasTagOrModel(s, '1:1') || hasTagOrModel(s, '编程') || hasTagOrModel(s, '开发'));
+    } else if (currentFilter === 'daily') {
+      list = list.filter(s => hasTagOrModel(s, '每日签到') || s.dailyValue > 0);
     }
 
-    // 2. 搜索关键词过滤
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       list = list.filter(s => {
@@ -189,19 +188,17 @@
         const recommendMatch = (s.recommend || '').toLowerCase().includes(q);
         const codeMatch = (s.affCode || '').toLowerCase().includes(q);
         const tagsMatch = (s.tags || []).some(t => t.toLowerCase().includes(q));
-        return nameMatch || descMatch || domainMatch || recommendMatch || codeMatch || tagsMatch;
+        const modelsMatch = (s.models || []).some(m => m.toLowerCase().includes(q));
+        return nameMatch || descMatch || domainMatch || recommendMatch || codeMatch || tagsMatch || modelsMatch;
       });
     }
 
-    // 3. 排序规则
     list.sort((a, b) => {
-      // 失效站点始终沉底
       if (a.status === 'inactive' && b.status !== 'inactive') return 1;
       if (a.status !== 'inactive' && b.status === 'inactive') return -1;
 
       switch (currentSort) {
         case 'recommend':
-          // 置顶优先 -> 加急优先 -> 奖励额度降序
           if (a.pinned && !b.pinned) return -1;
           if (!a.pinned && b.pinned) return 1;
           if (a.urgent && !b.urgent) return -1;
@@ -240,14 +237,18 @@
     if (els.emptyState) els.emptyState.style.display = 'none';
 
     els.cardsContainer.innerHTML = list.map(site => {
-      const isActive = site.status !== 'inactive';
-      const icon = site.icon || '🚀';
+      const icon = site.icon || '⚡';
       const colorGradient = site.color || 'linear-gradient(135deg, #6366f1, #38bdf8)';
       const tags = (site.tags || []).map(t => `<span class="card-tag-pill">${escapeHtml(t)}</span>`).join('');
       
+      const modelsHtml = (site.models || []).map(m => {
+        const isFlagship = m.includes('gpt-5.6') || m.includes('claude-opus-5');
+        return `<span class="model-pill ${isFlagship ? 'highlight' : ''}">✨ ${escapeHtml(m)}</span>`;
+      }).join('');
+
       const badgeHtml = site.badge 
         ? `<span class="card-top-badge">${escapeHtml(site.badge)}</span>` 
-        : (site.pinned ? `<span class="card-top-badge">⭐ 置顶推荐</span>` : '');
+        : (site.pinned ? `<span class="card-top-badge">⭐ 置顶力荐</span>` : '');
 
       const isNew = checkIsNew(site.date);
       const newBadgeHtml = isNew ? `<span class="card-new-badge">NEW</span>` : '';
@@ -272,11 +273,16 @@
               </div>
             </div>
 
+            <!-- 支持的旗舰模型 -->
+            <div class="card-model-strip">
+              ${modelsHtml}
+            </div>
+
             <p class="card-desc">${escapeHtml(site.desc || '优质高可用公益中转站')}</p>
 
             ${site.recommend ? `
-              <div class="card-recommend-box">
-                <strong>💡 站长点评：</strong>${escapeHtml(site.recommend)}
+              <div class="card-recommend-box ${site.urgent ? 'urgent-quote' : ''}">
+                ${escapeHtml(site.recommend)}
               </div>
             ` : ''}
 
@@ -308,6 +314,7 @@
               target="_blank" 
               rel="noopener noreferrer" 
               class="btn-primary-jump ${site.urgent ? 'urgent-glow' : ''}"
+              onclick="window.handleDirectJump('${escapeHtml(site.affCode || '')}', '${escapeHtml(site.name)}')"
               title="直达注册页面"
             >
               <span>🚀 立即直达领福利</span>
@@ -344,23 +351,129 @@
     return diffDays <= 7;
   }
 
+  // ===== 大招二：四大中转站精准选型/避坑对比表渲染 =====
+  function renderComparisonTable() {
+    if (!els.comparisonTableBody) return;
+
+    const tableData = [
+      {
+        id: "gorouter",
+        name: "GoRouter",
+        badge: "🔥 真实耐用王",
+        models: ["gpt-5.6-sol", "claude-opus-5", "deepseek-r1"],
+        rate: "1:1 真实无虚标",
+        isReal: true,
+        bestFor: "Cursor / VSCode / 极速编程与高频调用",
+        rating: "★★★★★",
+        link: "https://gorouter.app/sign-up?aff=ekWb",
+        affCode: "ekWb",
+        highlight: true
+      },
+      {
+        id: "agentrouter",
+        name: "AgentRouter",
+        badge: "👑 综合旗舰",
+        models: ["claude-opus-5", "gpt-5.6-sol", "全模型"],
+        rate: "官方标准比例",
+        isReal: false,
+        bestFor: "Claude 超长文本深度推理 / 全能日常",
+        rating: "★★★★★",
+        link: "https://agentrouter.org/register?aff=WTR4",
+        affCode: "WTR4",
+        highlight: false
+      },
+      {
+        id: "seekai",
+        name: "SeekAi",
+        badge: "💎 每日高额续期",
+        models: ["deepseek-r1", "gpt-5.6-sol"],
+        rate: "日常高性价比",
+        isReal: false,
+        bestFor: "DeepSeek 深度思考 / 每日高额签到白嫖",
+        rating: "★★★★★",
+        link: "https://seekai.cc/sign-up?aff=1PrI",
+        affCode: "1PrI",
+        highlight: false
+      },
+      {
+        id: "tabitoken",
+        name: "TaBiToken",
+        badge: "🔮 多模态生图",
+        models: ["gpt-5.6-sol", "claude-opus-5", "生图"],
+        rate: "大额度高并发",
+        isReal: false,
+        bestFor: "多模态解析 / 视觉生图 / 万级并发",
+        rating: "★★★★☆",
+        link: "https://tabitoken.com/sign-up?aff=DgIc",
+        affCode: "DgIc",
+        highlight: false
+      }
+    ];
+
+    els.comparisonTableBody.innerHTML = tableData.map(row => `
+      <tr class="${row.highlight ? 'highlight-row' : ''}">
+        <td>
+          <div class="table-site-cell">
+            <span>${escapeHtml(row.name)}</span>
+            <span class="table-site-badge">${escapeHtml(row.badge)}</span>
+          </div>
+        </td>
+        <td>
+          <div class="table-models-cell">
+            ${row.models.map(m => `<span>• ${escapeHtml(m)}</span>`).join('')}
+          </div>
+        </td>
+        <td>
+          <span class="table-rate-tag ${row.isReal ? 'real' : ''}">
+            ${row.isReal ? '⚡ 1:1 无倍率虚标 (最耐用)' : '标准倍率'}
+          </span>
+        </td>
+        <td>
+          <span style="font-weight:600; color: var(--text-primary);">${escapeHtml(row.bestFor)}</span>
+        </td>
+        <td>
+          <span class="table-star-rating">${row.rating}</span>
+        </td>
+        <td>
+          <a 
+            href="${escapeHtml(row.link)}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn-table-action ${row.highlight ? 'urgent' : ''}"
+            onclick="window.handleDirectJump('${escapeHtml(row.affCode)}', '${escapeHtml(row.name)}')"
+          >
+            🚀 领福利
+          </a>
+        </td>
+      </tr>
+    `).join('');
+  }
+
   // ===== 客户端配置教程 Tab 逻辑 =====
   const CLIENT_GUIDES = {
     cherry: {
       name: "Cherry Studio",
       steps: [
-        { title: "下载并安装 Cherry Studio", desc: "前往 Cherry Studio 官网下载对应系统客户端并打开。" },
-        { title: "进入设置 -> 模型服务", desc: "在左侧菜单点击「设置」，选择「模型服务」配置面板。" },
-        { title: "选择 OpenAI 兼容协议", desc: "添加自定义服务商，API 基础地址 (Base URL) 填入对应中转站提供的接口地址（例如：<code>https://api.agentrouter.org/v1</code>）。" },
-        { title: "填入 API Key 并测试", desc: "将你在中转站「个人中心/令牌管理」中创建的 <code>sk-xxxx</code> 填入，点击连接测试即可畅享全模型！" }
+        { title: "下载并打开 Cherry Studio", desc: "前往 Cherry Studio 官网下载安装对应系统客户端并运行。" },
+        { title: "进入设置 -> 模型服务", desc: "点击左下角「设置」图标，进入「模型服务」面板添加 OpenAI 协议服务商。" },
+        { title: "填入 Base URL 接口地址", desc: "填入中转站提供的接口地址（例如：<code>https://gorouter.app/v1</code> 或 <code>https://api.agentrouter.org/v1</code>）。" },
+        { title: "配置 API Key 与旗舰模型", desc: "填入你在中转站生成的 <code>sk-xxxx</code> 密钥，添加 <code>gpt-5.6-sol</code>、<code>claude-opus-5</code>、<code>deepseek-r1</code> 即可极速对话！" }
       ]
     },
     nextchat: {
       name: "NextChat (ChatGPT-Next-Web)",
       steps: [
         { title: "打开 NextChat 设置", desc: "点击网页或客户端左下角 ⚙️ 设置图标。" },
-        { title: "配置自定义接口地址", desc: "在「模型服务商」选择 OpenAI，接口地址填入中转站 Base URL（需带 <code>https://</code>）。" },
-        { title: "填入 API Key 令牌", desc: "填入你在中转站生成的 API Key，在自定义模型输入你想使用的模型名称（如 <code>gpt-4o</code>、<code>claude-3-7-sonnet</code>、<code>deepseek-r1</code>）。" }
+        { title: "配置自定义接口地址", desc: "在「模型服务商」选择 OpenAI，接口地址填入对应中转站 Base URL（带 <code>https://</code>）。" },
+        { title: "填入 API Key 令牌", desc: "填入你的 <code>sk-xxxx</code> 密钥，在自定义模型栏输入 <code>gpt-5.6-sol</code> 或 <code>claude-opus-5</code>。" }
+      ]
+    },
+    cursor: {
+      name: "Cursor / VS Code / Claude Code",
+      steps: [
+        { title: "进入 Cursor 设置面板", desc: "按 <code>Ctrl + ,</code> 或右上角齿轮进入 Settings -> Models。" },
+        { title: "开启 OpenAI Base URL 覆盖", desc: "开启 Override OpenAI Base URL，填入 GoRouter 极速中转地址（例如：<code>https://gorouter.app/v1</code>）。" },
+        { title: "填入 API Key 并验证模型", desc: "填入中转站 Key，点击 Verify 验证，添加 <code>gpt-5.6-sol</code>、<code>claude-opus-5</code> 享受丝滑秒级编程辅助！" }
       ]
     },
     chatbox: {
@@ -370,35 +483,24 @@
         { title: "选择 OpenAI API 模式", desc: "在 AI 模型提供商下拉菜单中选择「OpenAI API」。" },
         { title: "配置 API 域名与密钥", desc: "API 域名填入中转站地址，API 密钥填入你的 <code>sk-xxxx</code> 密钥，点击保存即可开始对话。" }
       ]
-    },
-    cursor: {
-      name: "Cursor / VS Code / Claude Code",
-      steps: [
-        { title: "进入 Cursor 设置面板", desc: "按 <code>Ctrl + ,</code> 或右上角齿轮进入 Settings -> Models。" },
-        { title: "开启 OpenAI API Key Override", desc: "开启 Override OpenAI Base URL，填入中转站 Base URL（例如：<code>https://gorouter.app/v1</code>）。" },
-        { title: "填入 API Key 并添加模型", desc: "填入对应中转站 Key，点击 Verify 进行验证，输入你想用的模型即可在编程中极速调用！" }
-      ]
     }
   };
 
   function renderClientGuides(activeKey = 'cherry') {
     if (!els.clientGuideTabs || !els.clientGuideContent) return;
 
-    // 渲染 Tabs
     els.clientGuideTabs.innerHTML = Object.keys(CLIENT_GUIDES).map(key => `
       <button class="client-tab-btn ${key === activeKey ? 'active' : ''}" data-client="${key}">
         ${CLIENT_GUIDES[key].name}
       </button>
     `).join('');
 
-    // 绑定 Tab 点击
     els.clientGuideTabs.querySelectorAll('.client-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         renderClientGuides(btn.dataset.client);
       });
     });
 
-    // 渲染内容
     const guide = CLIENT_GUIDES[activeKey];
     els.clientGuideContent.innerHTML = `
       <div style="margin-bottom: 16px; font-weight: 700; color: var(--accent-cyan);">
@@ -416,7 +518,7 @@
     `;
   }
 
-  // ===== FAQ 手风琴逻辑 =====
+  // ===== FAQ 手风琴 =====
   function initFAQ() {
     if (!els.faqAccordion) return;
     const items = els.faqAccordion.querySelectorAll('.faq-item');
@@ -425,7 +527,6 @@
       if (q) {
         q.addEventListener('click', () => {
           const isOpen = item.classList.contains('open');
-          // 单开模式
           items.forEach(i => i.classList.remove('open'));
           if (!isOpen) item.classList.add('open');
         });
@@ -436,7 +537,7 @@
   // ===== 公告弹窗逻辑 =====
   function checkNoticeModal() {
     if (!CONFIG.noticeContent) return;
-    const currentVer = CONFIG.noticeVersion || 1;
+    const currentVer = CONFIG.noticeVersion || 2;
     const dismissedVer = parseInt(localStorage.getItem('notice_dismissed_version') || '0', 10);
 
     if (currentVer > dismissedVer) {
@@ -460,12 +561,23 @@
     if (!els.noticeModal) return;
     els.noticeModal.style.display = 'none';
     if (permanent) {
-      localStorage.setItem('notice_dismissed_version', String(CONFIG.noticeVersion || 1));
+      localStorage.setItem('notice_dismissed_version', String(CONFIG.noticeVersion || 2));
       showToast('已设为不再自动弹出');
     }
   };
 
-  // ===== 剪贴板复制工具 =====
+  // ===== 剪贴板复制 & 直达辅助 =====
+  window.handleDirectJump = function (code, name) {
+    if (code) {
+      try {
+        navigator.clipboard.writeText(code);
+        showToast(`🎉 已自动为您复制 ${name} 专属邀请码：${code}`);
+      } catch (e) {
+        fallbackCopy(code);
+      }
+    }
+  };
+
   window.copyInviteCode = async function (code, name) {
     try {
       await navigator.clipboard.writeText(code);
@@ -510,21 +622,18 @@
     }, 2800);
   }
 
-  // ===== HTML 转义防止 XSS =====
   function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = String(str);
     return div.innerHTML;
   }
 
-  // ===== 事件监听绑定 =====
+  // ===== 事件监听 =====
   function bindEvents() {
-    // 主题切换
     if (els.themeToggleBtn) {
       els.themeToggleBtn.addEventListener('click', toggleTheme);
     }
 
-    // 搜索输入
     if (els.searchInput) {
       els.searchInput.addEventListener('input', (e) => {
         searchQuery = e.target.value;
@@ -534,7 +643,6 @@
         renderCards();
       });
 
-      // 快捷键 / 聚焦搜索
       window.addEventListener('keydown', (e) => {
         if (e.key === '/' && document.activeElement !== els.searchInput) {
           e.preventDefault();
@@ -543,7 +651,6 @@
       });
     }
 
-    // 清空搜索
     if (els.searchClearBtn) {
       els.searchClearBtn.addEventListener('click', () => {
         searchQuery = '';
@@ -553,7 +660,6 @@
       });
     }
 
-    // 排序切换
     if (els.sortSelect) {
       els.sortSelect.addEventListener('change', (e) => {
         currentSort = e.target.value;
@@ -561,7 +667,6 @@
       });
     }
 
-    // 返回顶部
     if (els.backToTopBtn) {
       window.addEventListener('scroll', () => {
         if (window.scrollY > 400) {
@@ -577,16 +682,16 @@
     }
   }
 
-  // ===== 全量渲染入口 =====
+  // ===== 全量渲染 =====
   function renderAll() {
     renderStats();
     renderFilterTabs();
     renderCards();
+    renderComparisonTable();
     renderClientGuides('cherry');
     initFAQ();
   }
 
-  // DOM 就绪后启动
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

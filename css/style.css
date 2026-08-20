@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AI 公益中转站导航 - 现代科技感美学样式系统
+   AI 公益中转站导航 - 现代科技感美学样式系统 (旗舰进化版)
    设计理念: 赛博玻璃拟物 (Cyber Glassmorphism), 微光粒子渐变, 极致动效
    ========================================================================== */
 
@@ -63,10 +63,10 @@
 [data-theme="light"] {
   --bg-main: #f8fafc;
   --bg-secondary: #f1f5f9;
-  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card: rgba(255, 255, 255, 0.88);
   --bg-card-hover: #ffffff;
   --bg-input: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.88);
   --bg-modal: #ffffff;
 
   --border-subtle: rgba(0, 0, 0, 0.06);
@@ -339,9 +339,9 @@ button {
 
 /* ===== Hero 模块 ===== */
 .hero-section {
-  padding: 56px 24px 32px;
+  padding: 52px 24px 28px;
   text-align: center;
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
@@ -376,12 +376,12 @@ button {
 }
 
 .hero-title {
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(30px, 4.8vw, 48px);
   font-weight: 900;
   letter-spacing: -1px;
-  line-height: 1.2;
+  line-height: 1.25;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #a855f7 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #38bdf8 65%, #a855f7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -395,9 +395,37 @@ button {
 .hero-sub {
   font-size: clamp(15px, 2vw, 17px);
   color: var(--text-secondary);
-  max-width: 720px;
-  margin: 0 auto 36px;
-  line-height: 1.7;
+  max-width: 760px;
+  margin: 0 auto 32px;
+  line-height: 1.75;
+}
+
+.hero-model-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.hero-model-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  font-family: monospace;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .hero-model-chip {
+  background: rgba(241, 245, 249, 0.9);
+  color: #0284c7;
 }
 
 /* 统计数据看板 (Stats Cards) */
@@ -405,8 +433,8 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  max-width: 860px;
-  margin: 0 auto 32px;
+  max-width: 880px;
+  margin: 0 auto 28px;
 }
 
 .stat-card {
@@ -467,11 +495,11 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(56, 189, 248, 0.1));
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-full);
   padding: 10px 24px;
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--text-primary);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
@@ -568,7 +596,7 @@ button {
 
 .search-box {
   position: relative;
-  width: 240px;
+  width: 260px;
 }
 
 .search-input {
@@ -652,7 +680,7 @@ button {
 .main-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px 60px;
+  padding: 0 24px 50px;
   flex: 1;
 }
 
@@ -701,13 +729,26 @@ button {
   opacity: 1;
 }
 
-/* 置顶 & 紧急光效 */
+/* 置顶 & 紧急高光呼吸动画 (大招三：GoRouter 高光加急流光) */
 .site-card.pinned {
   border-color: rgba(99, 102, 241, 0.35);
 }
 
 .site-card.is-urgent {
-  box-shadow: 0 0 20px rgba(244, 63, 94, 0.12);
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  animation: urgent-pulse-glow 3s infinite alternate ease-in-out;
+}
+
+@keyframes urgent-pulse-glow {
+  0% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.15), inset 0 0 15px rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 28px rgba(245, 158, 11, 0.35), inset 0 0 20px rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.9);
+  }
 }
 
 /* 卡片角标 */
@@ -725,10 +766,10 @@ button {
   font-weight: 700;
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(244, 63, 94, 0.2));
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #fda4af;
-  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.2);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.25));
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fde68a;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
 }
 
 .card-new-badge {
@@ -783,13 +824,38 @@ button {
   font-family: monospace;
 }
 
+/* 旗舰模型支持高亮标签条 */
+.card-model-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.model-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: var(--accent-cyan);
+  font-family: monospace;
+}
+
+.model-pill.highlight {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+}
+
 /* 卡片描述 */
 .card-desc {
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 14px;
-  min-height: 42px;
+  margin-bottom: 12px;
+  min-height: 40px;
 }
 
 /* 站长推荐语气泡 (Quote) */
@@ -800,9 +866,15 @@ button {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-size: 12px;
   color: var(--accent-cyan);
-  margin-bottom: 16px;
-  line-height: 1.5;
+  margin-bottom: 14px;
+  line-height: 1.55;
   font-weight: 500;
+}
+
+.card-recommend-box.urgent-quote {
+  background: rgba(245, 158, 11, 0.1);
+  border-left-color: var(--accent-amber);
+  color: #fde047;
 }
 
 /* 标签列表 */
@@ -810,7 +882,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .card-tag-pill {
@@ -828,11 +900,11 @@ button {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.22);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 12px 8px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-align: center;
 }
 
@@ -864,23 +936,15 @@ button {
 }
 
 .reward-cell-value {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 800;
   color: var(--text-primary);
   white-space: nowrap;
 }
 
-.reward-cell-value.highlight-green {
-  color: var(--accent-emerald);
-}
-
-.reward-cell-value.highlight-amber {
-  color: var(--accent-amber);
-}
-
-.reward-cell-value.highlight-cyan {
-  color: var(--accent-cyan);
-}
+.reward-cell-value.highlight-green { color: var(--accent-emerald); }
+.reward-cell-value.highlight-amber { color: var(--accent-amber); }
+.reward-cell-value.highlight-cyan { color: var(--accent-cyan); }
 
 /* 卡片操作按钮组 */
 .card-actions-row {
@@ -912,12 +976,12 @@ button {
 }
 
 .btn-primary-jump.urgent-glow {
-  background: linear-gradient(135deg, #e11d48, #ec4899);
-  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
 }
 
 .btn-primary-jump.urgent-glow:hover {
-  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6);
 }
 
 .btn-icon-copy {
@@ -942,7 +1006,7 @@ button {
   transform: translateY(-2px);
 }
 
-/* 空状态 (Empty state) */
+/* 空状态 */
 .empty-state-box {
   grid-column: 1 / -1;
   text-align: center;
@@ -966,7 +1030,176 @@ button {
   margin-bottom: 8px;
 }
 
-/* ===== 常用客户端配置指南 (Client Guide Section) ===== */
+/* ==========================================================================
+   大招二：四大中转站精准选型/避坑对比表 (Comparison Matrix Section)
+   ========================================================================== */
+.comparison-section {
+  max-width: 1280px;
+  margin: 0 auto 60px;
+  padding: 0 24px;
+}
+
+.comparison-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.comparison-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.comparison-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #f8fafc, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .comparison-title {
+  background: linear-gradient(135deg, #0f172a, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.comparison-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+  min-width: 800px;
+}
+
+.comparison-table th {
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-muted);
+  font-weight: 700;
+  padding: 14px 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+[data-theme="light"] .comparison-table th {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.comparison-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* 高光推荐行 (GoRouter & AgentRouter) */
+.comparison-table tr.highlight-row {
+  background: rgba(245, 158, 11, 0.06);
+}
+
+.comparison-table tr.highlight-row td {
+  color: var(--text-primary);
+}
+
+.table-site-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.table-site-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.table-models-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  color: var(--accent-cyan);
+}
+
+.table-rate-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  color: var(--accent-emerald);
+}
+
+.table-rate-tag.real {
+  color: #f59e0b;
+  font-weight: 800;
+}
+
+.table-star-rating {
+  color: #fbbf24;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.btn-table-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), #4f46e5);
+  color: #fff;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.btn-table-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
+}
+
+.btn-table-action.urgent {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+/* ===== 常用客户端配置指南 ===== */
 .client-guide-section {
   max-width: 1280px;
   margin: 0 auto 60px;
@@ -1077,20 +1310,6 @@ button {
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.6;
-}
-
-.code-snippet-box {
-  margin-top: 8px;
-  background: var(--bg-main);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-family: monospace;
-  font-size: 12px;
-  color: var(--accent-cyan);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* ===== 常见问题 FAQ 模块 ===== */
@@ -1432,6 +1651,14 @@ button {
 
   .site-card {
     padding: 18px;
+  }
+
+  .comparison-section {
+    padding: 0 16px;
+  }
+
+  .comparison-card {
+    padding: 24px 16px;
   }
 
   .client-guide-section {

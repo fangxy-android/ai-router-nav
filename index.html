@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 公益中转导航 · 精选免费额度与专属邀请码推荐</title>
-  <meta name="description" content="精选高额度公益 AI 中转站推荐，支持 Claude 3.7、GPT-4o、DeepSeek-R1 等全模型。注册即送免费额度，配合专属邀请码额外享加赠福利！">
-  <meta name="keywords" content="AI公益站, 免费AI中转, OpenAI中转, Claude中转, DeepSeek免费额度, 邀请码, Cherry Studio配置">
+  <title>AI 旗舰公益中转导航 · gpt-5.6-sol / claude-opus-5 免费额度与专属邀请码推荐</title>
+  <meta name="description" content="精选高额度公益 AI 中转站推荐，全网首发支持 gpt-5.6-sol、claude-opus-5、DeepSeek-R1 等全系列旗舰模型。注册即送免费额度，配合专属邀请码额外享加赠福利！">
+  <meta name="keywords" content="AI公益站, gpt-5.6-sol, claude-opus-5, DeepSeek-R1, 免费AI中转, OpenAI中转, Claude中转, 邀请码, Cherry Studio配置">
   <meta name="theme-color" content="#0a0e17">
   
   <!-- 引入样式表 -->
@@ -24,8 +24,8 @@
 
     <!-- 顶部置顶通知条 -->
     <aside class="global-notice-bar" id="globalNoticeBar">
-      <span class="notice-pill">福利公告</span>
-      <span id="globalNoticeText">新站上线！所有站点通过专属链接注册均可领取额外加赠礼包。</span>
+      <span class="notice-pill">重磅上线</span>
+      <span id="globalNoticeText">全站中转站已全面接入 gpt-5.6-sol、claude-opus-5 超旗舰大模型，注册立领加赠！</span>
       <span class="notice-link-btn" onclick="window.showNoticeModal()">查看详情 &raquo;</span>
       <button class="notice-close-btn" onclick="document.getElementById('globalNoticeBar').style.display='none'" title="关闭此通知">&times;</button>
     </aside>
@@ -37,11 +37,14 @@
           <div class="brand-logo-icon">⚡</div>
           <div class="brand-text-wrap">
             <span class="brand-title">AI 公益中转导航</span>
-            <span class="brand-subtitle">免费额度 · 极速聚合</span>
+            <span class="brand-subtitle">旗舰模型 · 免费额度聚合</span>
           </div>
         </div>
 
         <nav class="nav-actions">
+          <a href="#comparison-section" class="nav-btn">
+            <span>📊 选型对比</span>
+          </a>
           <a href="#client-guide" class="nav-btn">
             <span>📖 客户端配置</span>
           </a>
@@ -64,15 +67,23 @@
       <section class="hero-section">
         <div class="hero-badge">
           <span class="badge-pulse-dot"></span>
-          <span>实时收录 · 2026 精选高额度可用站点</span>
+          <span>实时收录 · 2026 精选 gpt-5.6-sol / claude-opus-5 旗舰中转</span>
         </div>
 
-        <h1 class="hero-title">免费领取 AI 额度 · 公益中转站精选导航</h1>
+        <h1 class="hero-title">免费领取 AI 额度 · 旗舰中转站精选导航</h1>
 
         <p class="hero-sub">
-          收录全网优质、低延迟、高额度的 AI 公益中转站。支持 Claude 3.7 / GPT-4o / DeepSeek-R1 全模型。
+          收录全网优质、极速响应、高额度的 AI 公益中转站。全面支持 <strong>gpt-5.6-sol / claude-opus-5 / DeepSeek-R1</strong> 全模型。
           点击注册即享新手豪华额度，配合专属邀请码额外享受叠加福利！
         </p>
+
+        <!-- 旗舰模型支持胶囊 -->
+        <div class="hero-model-tags">
+          <span class="hero-model-chip">✨ gpt-5.6-sol (超旗舰)</span>
+          <span class="hero-model-chip">👑 claude-opus-5 (顶级推理)</span>
+          <span class="hero-model-chip">🧠 DeepSeek-R1 (深度思考)</span>
+          <span class="hero-model-chip">⚡ 1:1 真实扣费无套路</span>
+        </div>
 
         <!-- 统计看板 -->
         <div class="hero-stats-grid" id="heroStats">
@@ -104,7 +115,7 @@
                 type="text" 
                 class="search-input" 
                 id="searchInput" 
-                placeholder="搜索站点 / 标签 / 邀请码... (按 / 聚焦)"
+                placeholder="搜索站点 / 旗舰模型 / 邀请码... (按 / 聚焦)"
                 autocomplete="off"
               >
               <button class="search-clear-btn" id="searchClearBtn" title="清空搜索">&times;</button>
@@ -113,7 +124,7 @@
             <div class="sort-select-wrap">
               <select class="sort-select" id="sortSelect" title="选择排序方式">
                 <option value="recommend">⭐ 综合推荐排序</option>
-                <option value="bonus-desc">💰 注册奖励 (从高到低)</option>
+                <option value="bonus-desc">💰 奖励额度 (从高到低)</option>
                 <option value="daily-desc">⚡ 签到福利 (从高到低)</option>
                 <option value="date-desc">🕒 最新收录优先</option>
               </select>
@@ -133,7 +144,35 @@
         <div class="empty-state-box" id="emptyState" style="display: none;">
           <div class="empty-state-icon">🔎</div>
           <div class="empty-state-title">未找到匹配的公益中转站</div>
-          <p>换个关键词试试，或者点击上方「全部推荐」重置筛选条件。</p>
+          <p>换个关键词试试，或者点击上方「全部精选」重置筛选条件。</p>
+        </div>
+      </section>
+
+      <!-- 大招二：四大中转站精准选型/避坑对比表 (Comparison Section) -->
+      <section class="comparison-section" id="comparison-section">
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <h2 class="comparison-title">📊 四大精选中转站 · 选型与避坑真实对比表</h2>
+            <p class="comparison-sub">站长实测耗时数周整理，助你根据使用场景精准选择最适合的中转站，避免被虚高倍率套路</p>
+          </div>
+
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>中转站点</th>
+                  <th>支持王牌模型</th>
+                  <th>真实扣费与耐用度</th>
+                  <th>最适应用途</th>
+                  <th>综合推荐指数</th>
+                  <th>专属直达</th>
+                </tr>
+              </thead>
+              <tbody id="comparisonTableBody">
+                <!-- 由 js/app.js 动态渲染 -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -142,7 +181,7 @@
         <div class="guide-panel-card">
           <div class="guide-panel-header">
             <h2 class="guide-panel-title">🚀 常用 AI 客户端快速配置教程</h2>
-            <p class="guide-panel-sub">拿到中转站的 API Key 和 Base URL 后，按以下步骤即可在本地无缝调用全套大模型</p>
+            <p class="guide-panel-sub">拿到中转站的 API Key 和 Base URL 后，按以下步骤即可在本地无缝调用全套旗舰大模型</p>
           </div>
 
           <!-- 客户端切换 Tabs -->
@@ -171,13 +210,23 @@
               <span class="faq-arrow">▼</span>
             </div>
             <div class="faq-answer">
-              公益中转站是由站长或技术社区搭建的 OpenAI / Anthropic 兼容 API 聚合转发平台。它们通常聚合了多家上游算力，用户无需自备境外信用卡或折腾复杂的海外网络，只需使用中转站提供的 API Key 即可在任何客户端（如 Cherry Studio、NextChat、Cursor 等）中调用 Claude 3.7、GPT-4o、DeepSeek-R1 等顶级模型，且注册和每日签到都有大量免费额度赠送。
+              公益中转站是由站长或技术社区搭建的 OpenAI / Anthropic 兼容 API 聚合转发平台。它们通常聚合了全球多家上游算力，用户无需自备境外信用卡或折腾复杂的海外网络环境，只需使用中转站提供的 API Key 即可在任何客户端（如 Cherry Studio、NextChat、Cursor 等）中调用 <strong>gpt-5.6-sol</strong>、<strong>claude-opus-5</strong>、<strong>DeepSeek-R1</strong> 等顶级旗舰模型，且注册和每日签到都有大量免费额度赠送。
             </div>
           </div>
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>2. 为什么要通过本站的专属链接注册？</span>
+              <span>2. 为什么有些站点额度标得很高，但 GoRouter 反而更耐用？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              这是很多新手的常见误区！部分中转站虽然宣传注册赠送 $120，但后台模型扣费倍率可能高达 3~5 倍，实际发几十次请求额度就见底了；而 <strong>GoRouter 采用独家 1:1 真实扣费无虚标</strong>，不锁并发，实测相同对话量下耐用度比标价虚高的站点多出 2 倍以上，非常适合编程与长时间挂载调用！
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>3. 为什么要通过本站的专属链接注册？</span>
               <span class="faq-arrow">▼</span>
             </div>
             <div class="faq-answer">
@@ -187,26 +236,13 @@
 
           <div class="faq-item">
             <div class="faq-question">
-              <span>3. 如何做到长期不花钱白嫖 AI 额度？</span>
+              <span>4. 如何做到长期不花钱白嫖 AI 额度？</span>
               <span class="faq-arrow">▼</span>
             </div>
             <div class="faq-answer">
               1. **矩阵注册**：将本站收录的 4 个站点全部注册一遍，立即到手合计超过 $400 的新手大礼包！<br>
               2. **每日签到**：大部分站点均提供每日签到赠送（如 AgentRouter、SeekAi 每天可领 $20~$25），每天花 10 秒点一次签到，即可维持源源不断的日常对话额度。<br>
-              3. **合理配置模型**：日常闲聊或快速问答选用高性价比的 DeepSeek 或轻量模型，攻坚复杂编程与学术推理时调用 Claude 3.7 Sonnet 或 GPT-4o。
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-question">
-              <span>4. 使用公益站有安全风险吗？有什么注意事项？</span>
-              <span class="faq-arrow">▼</span>
-            </div>
-            <div class="faq-answer">
-              使用中转站调用 API 时，请求会经由中转服务器转发至上游官方。请遵守以下原则：<br>
-              • 严禁在对话中发送真实的个人银行卡、身份证、公司敏感业务机密等隐私信息；<br>
-              • 妥善保管好个人生成的 <code>sk-xxxx</code> API 密钥，不要泄露在公开 GitHub 代码库中；<br>
-              • 本站仅为公益信息聚合与邀请推荐，不参与任何第三方的商业运营。
+              3. **合理搭配站点**：编程开发首选用 GoRouter 极速 1:1 调用；长文推理用 AgentRouter (claude-opus-5)；深度思考用 SeekAi (DeepSeek-R1)；生图用 TaBiToken。
             </div>
           </div>
         </div>
