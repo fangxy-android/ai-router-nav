@@ -1,6 +1,6 @@
 /* ==========================================================================
-   AI 公益中转站导航 - 现代科技感美学样式系统 (2x2 对称美化版)
-   设计理念: 赛博毛玻璃 (Cyber Glassmorphism), 完美 2x2 对齐, 极致明暗对比
+   AI 公益中转站导航 - 现代科技感美学样式系统 (一行四卡极简版)
+   设计理念: 赛博毛玻璃 (Cyber Glassmorphism), 4卡一排平铺, 完美响应式
    ========================================================================== */
 
 /* ===== CSS 变量系统与主题定义 ===== */
@@ -13,9 +13,6 @@
   --bg-input: rgba(15, 23, 42, 0.8);
   --bg-glass: rgba(15, 23, 42, 0.75);
   --bg-modal: #111827;
-  --bg-table-th: #111827;
-  --bg-table-td: rgba(17, 24, 39, 0.6);
-  --bg-table-hover: rgba(30, 41, 59, 0.5);
 
   /* 边框与分割线 */
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -52,7 +49,7 @@
   /* 尺寸与圆角 */
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 20px;
+  --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
@@ -71,9 +68,6 @@
   --bg-input: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.92);
   --bg-modal: #ffffff;
-  --bg-table-th: #f8fafc;
-  --bg-table-td: #ffffff;
-  --bg-table-hover: #f1f5f9;
 
   --border-subtle: #e2e8f0;
   --border-card: #cbd5e1;
@@ -197,7 +191,7 @@ button {
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 24px;
   height: 68px;
@@ -337,7 +331,7 @@ button {
 
 /* ===== Hero 模块 ===== */
 .hero-section {
-  padding: 48px 24px 24px;
+  padding: 44px 24px 20px;
   text-align: center;
   max-width: 960px;
   margin: 0 auto;
@@ -354,7 +348,7 @@ button {
   font-size: 13px;
   font-weight: 600;
   color: var(--accent-cyan);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   box-shadow: 0 0 16px rgba(99, 102, 241, 0.15);
 }
 
@@ -374,11 +368,11 @@ button {
 }
 
 .hero-title {
-  font-size: clamp(28px, 4.5vw, 44px);
+  font-size: clamp(28px, 4.2vw, 42px);
   font-weight: 900;
   letter-spacing: -1px;
   line-height: 1.25;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   background: linear-gradient(135deg, #ffffff 20%, #38bdf8 65%, #a855f7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -391,11 +385,11 @@ button {
 }
 
 .hero-sub {
-  font-size: clamp(14px, 1.8vw, 16.5px);
+  font-size: clamp(14px, 1.8vw, 16px);
   color: var(--text-secondary);
   max-width: 760px;
-  margin: 0 auto 24px;
-  line-height: 1.75;
+  margin: 0 auto 20px;
+  line-height: 1.7;
 }
 
 .hero-model-tags {
@@ -403,7 +397,7 @@ button {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .hero-model-chip {
@@ -434,7 +428,7 @@ button {
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   max-width: 860px;
-  margin: 0 auto 24px;
+  margin: 0 auto 20px;
 }
 
 .stat-card {
@@ -443,7 +437,7 @@ button {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
-  padding: 16px 10px;
+  padding: 14px 8px;
   text-align: center;
   transition: all var(--transition-normal);
   position: relative;
@@ -474,7 +468,7 @@ button {
 }
 
 .stat-value {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 900;
   letter-spacing: -0.5px;
   margin-bottom: 2px;
@@ -486,7 +480,7 @@ button {
 .stat-value.purple { color: var(--accent-purple); }
 
 .stat-label {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-muted);
   font-weight: 600;
 }
@@ -495,12 +489,12 @@ button {
 .hero-guide-banner {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12));
   border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: var(--radius-full);
-  padding: 9px 22px;
-  font-size: 13.5px;
+  padding: 8px 20px;
+  font-size: 13px;
   color: var(--text-primary);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
@@ -525,8 +519,8 @@ button {
 
 /* ===== 控制栏 (筛选 / 搜索 / 排序) ===== */
 .controls-section {
-  max-width: 1200px;
-  margin: 0 auto 28px;
+  max-width: 1440px;
+  margin: 0 auto 24px;
   padding: 0 24px;
 }
 
@@ -536,12 +530,12 @@ button {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  padding: 14px 18px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -554,9 +548,9 @@ button {
 }
 
 .filter-tab {
-  padding: 7px 16px;
+  padding: 6px 14px;
   border-radius: var(--radius-full);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-secondary);
   background: var(--bg-secondary);
@@ -597,18 +591,18 @@ button {
 
 .search-box {
   position: relative;
-  width: 260px;
+  width: 250px;
 }
 
 .search-input {
   width: 100%;
-  height: 38px;
-  padding: 0 36px 0 34px;
+  height: 36px;
+  padding: 0 34px 0 32px;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
   color: var(--text-primary);
-  font-size: 13px;
+  font-size: 12.5px;
   outline: none;
   transition: all var(--transition-fast);
 }
@@ -620,11 +614,11 @@ button {
 
 .search-icon {
   position: absolute;
-  left: 12px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13px;
   pointer-events: none;
 }
 
@@ -634,7 +628,7 @@ button {
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13px;
   padding: 4px;
   display: none;
 }
@@ -650,13 +644,13 @@ button {
 }
 
 .sort-select {
-  height: 38px;
-  padding: 0 32px 0 14px;
+  height: 36px;
+  padding: 0 30px 0 12px;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
   color: var(--text-primary);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   outline: none;
   appearance: none;
@@ -671,17 +665,17 @@ button {
 
 .sort-select-icon {
   position: absolute;
-  right: 12px;
+  right: 10px;
   pointer-events: none;
   font-size: 10px;
   color: var(--text-muted);
 }
 
 /* ==========================================================================
-   核心卡片网格系统 (完美 2x2 对称布局：一行两个)
+   核心卡片网格系统 (一行四个卡片平铺布局)
    ========================================================================== */
 .main-container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 24px 50px;
   flex: 1;
@@ -689,8 +683,8 @@ button {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 4个卡片完美 2x2 对称排列 */
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr); /* 4个卡片一行平铺 */
+  gap: 20px;
 }
 
 /* 站点卡片容器 */
@@ -700,7 +694,7 @@ button {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -757,22 +751,23 @@ button {
 /* 卡片角标 */
 .card-badges-wrapper {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .card-top-badge {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(239, 68, 68, 0.25));
   border: 1px solid rgba(245, 158, 11, 0.5);
   color: #fde68a;
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
+  white-space: nowrap;
 }
 
 [data-theme="light"] .card-top-badge {
@@ -782,9 +777,9 @@ button {
 }
 
 .card-new-badge {
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 800;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, #10b981, #059669);
   color: #fff;
@@ -795,19 +790,19 @@ button {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-  padding-right: 60px;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-right: 50px;
 }
 
 .card-icon-box {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
   color: #fff;
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -819,7 +814,7 @@ button {
 }
 
 .card-site-name {
-  font-size: 18px;
+  font-size: 16.5px;
   font-weight: 800;
   color: var(--text-primary);
   display: flex;
@@ -828,7 +823,7 @@ button {
 }
 
 .card-domain-tag {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   font-family: monospace;
 }
@@ -837,14 +832,14 @@ button {
 .card-model-strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
 .model-pill {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  padding: 2px 9px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.35);
@@ -872,23 +867,23 @@ button {
 
 /* 卡片描述 */
 .card-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 12px;
-  min-height: 42px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+  min-height: 40px;
 }
 
 /* 站长推荐语气泡 (Quote) */
 .card-recommend-box {
   background: rgba(99, 102, 241, 0.08);
   border-left: 3px solid var(--primary);
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--accent-cyan);
-  margin-bottom: 14px;
-  line-height: 1.55;
+  margin-bottom: 12px;
+  line-height: 1.5;
   font-weight: 500;
 }
 
@@ -914,14 +909,14 @@ button {
 .card-tags-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 14px;
 }
 
 .card-tag-pill {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: var(--radius-sm);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
@@ -932,12 +927,12 @@ button {
 .reward-breakdown-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 4px;
   background: rgba(0, 0, 0, 0.22);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 12px 8px;
-  margin-bottom: 18px;
+  padding: 10px 4px;
+  margin-bottom: 16px;
   text-align: center;
 }
 
@@ -951,6 +946,7 @@ button {
   flex-direction: column;
   justify-content: center;
   position: relative;
+  padding: 0 2px;
 }
 
 .reward-cell:not(:last-child)::after {
@@ -964,16 +960,19 @@ button {
 }
 
 .reward-cell-label {
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--text-muted);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  white-space: nowrap;
 }
 
 .reward-cell-value {
-  font-size: 12.5px;
+  font-size: 11.5px;
   font-weight: 800;
   color: var(--text-primary);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .reward-cell-value.highlight-green { color: var(--accent-emerald); }
@@ -983,7 +982,7 @@ button {
 /* 卡片操作按钮组 */
 .card-actions-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
 }
 
@@ -992,15 +991,16 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   background: linear-gradient(135deg, var(--primary), #4f46e5);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
-  padding: 11px 16px;
+  padding: 10px 12px;
   border-radius: var(--radius-md);
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .btn-primary-jump:hover {
@@ -1019,8 +1019,8 @@ button {
 }
 
 .btn-icon-copy {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1028,7 +1028,7 @@ button {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: 14px;
   transition: all var(--transition-fast);
   flex-shrink: 0;
 }
@@ -1064,181 +1064,9 @@ button {
   margin-bottom: 8px;
 }
 
-/* ==========================================================================
-   四大中转站选型对比表 (稳定静态表格系统，彻底解决变形问题)
-   ========================================================================== */
-.comparison-section {
-  max-width: 1200px;
-  margin: 0 auto 50px;
-  padding: 0 24px;
-}
-
-.comparison-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-xl);
-  padding: 32px 28px;
-  box-shadow: var(--shadow-md);
-}
-
-.comparison-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.comparison-title {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 6px;
-  color: var(--text-primary);
-}
-
-.comparison-sub {
-  font-size: 13.5px;
-  color: var(--text-muted);
-}
-
-.comparison-table-wrapper {
-  overflow-x: auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 13.5px;
-  min-width: 780px;
-}
-
-.comparison-table th {
-  background: var(--bg-table-th);
-  color: var(--text-primary);
-  font-weight: 800;
-  padding: 14px 16px;
-  font-size: 13px;
-  border-bottom: 2px solid var(--border-subtle);
-  white-space: nowrap;
-}
-
-.comparison-table td {
-  padding: 16px;
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-  vertical-align: middle;
-  background: var(--bg-table-td);
-}
-
-.comparison-table tr:last-child td {
-  border-bottom: none;
-}
-
-.comparison-table tr:hover td {
-  background: var(--bg-table-hover);
-}
-
-/* 高光推荐行 (GoRouter 专属高光) */
-.comparison-table tr.highlight-row td {
-  background: rgba(245, 158, 11, 0.08);
-}
-
-[data-theme="light"] .comparison-table tr.highlight-row td {
-  background: #fffbeb;
-}
-
-.table-site-cell {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.table-site-badge {
-  font-size: 10.5px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  background: rgba(245, 158, 11, 0.2);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.4);
-}
-
-[data-theme="light"] .table-site-badge {
-  background: #fef3c7;
-  color: #b45309;
-  border-color: #f59e0b;
-}
-
-.table-models-cell {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  font-family: monospace;
-  font-size: 12px;
-  color: var(--accent-cyan);
-}
-
-[data-theme="light"] .table-models-cell {
-  color: #0284c7;
-}
-
-.table-rate-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 700;
-  color: var(--accent-emerald);
-}
-
-.table-rate-tag.real {
-  color: #f59e0b;
-  font-weight: 800;
-}
-
-[data-theme="light"] .table-rate-tag.real {
-  color: #d97706;
-}
-
-.table-star-rating {
-  color: #fbbf24;
-  letter-spacing: 2px;
-  font-size: 13px;
-}
-
-.btn-table-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 7px 16px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), #4f46e5);
-  color: #fff;
-  transition: all var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
-  white-space: nowrap;
-}
-
-.btn-table-action:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.5);
-}
-
-.btn-table-action.urgent {
-  background: linear-gradient(135deg, #f59e0b, #ef4444);
-  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
-}
-
 /* ===== 常用客户端配置指南 ===== */
 .client-guide-section {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto 50px;
   padding: 0 24px;
 }
@@ -1626,7 +1454,14 @@ button {
 }
 
 /* ===== 移动端与平板响应式 ===== */
-@media (max-width: 860px) {
+@media (max-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 平板/小笔记本 2列 */
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
   .nav-container {
     padding: 0 16px;
     height: 60px;
@@ -1674,20 +1509,12 @@ button {
   }
 
   .cards-grid {
-    grid-template-columns: 1fr; /* 移动端单列 */
+    grid-template-columns: 1fr; /* 手机端单列 */
     gap: 16px;
   }
 
   .site-card {
     padding: 18px;
-  }
-
-  .comparison-section {
-    padding: 0 16px;
-  }
-
-  .comparison-card {
-    padding: 20px 14px;
   }
 
   .client-guide-section {

@@ -1,5 +1,5 @@
 /**
- * AI 公益中转站导航 - 核心应用逻辑 (旗舰进化版)
+ * AI 公益中转站导航 - 核心应用逻辑 (4卡一行极简版)
  * 纯原生现代化 ES6+ 编写，轻量高效，零外部依赖
  */
 
@@ -28,7 +28,6 @@
     sortSelect: document.getElementById('sortSelect'),
     cardsContainer: document.getElementById('cardsContainer'),
     emptyState: document.getElementById('emptyState'),
-    comparisonTableBody: document.getElementById('comparisonTableBody'),
     toastContainer: document.getElementById('toastContainer'),
     backToTopBtn: document.getElementById('backToTopBtn'),
     clientGuideTabs: document.getElementById('clientGuideTabs'),
@@ -294,15 +293,15 @@
             <div class="reward-breakdown-grid">
               <div class="reward-cell">
                 <span class="reward-cell-label">注册即赠</span>
-                <span class="reward-cell-value highlight-cyan">${escapeHtml(site.registerBonus || '$0')}</span>
+                <span class="reward-cell-value highlight-cyan" title="${escapeHtml(site.registerBonus || '$0')}">${escapeHtml(site.registerBonus || '$0')}</span>
               </div>
               <div class="reward-cell">
-                <span class="reward-cell-label">专属邀请加赠</span>
-                <span class="reward-cell-value highlight-amber">${escapeHtml(site.inviteBonus || '赠送')}</span>
+                <span class="reward-cell-label">专属加赠</span>
+                <span class="reward-cell-value highlight-amber" title="${escapeHtml(site.inviteBonus || '赠送')}">${escapeHtml(site.inviteBonus || '赠送')}</span>
               </div>
               <div class="reward-cell">
                 <span class="reward-cell-label">每日签到</span>
-                <span class="reward-cell-value highlight-green">${escapeHtml(site.dailyBonus || '有')}</span>
+                <span class="reward-cell-value highlight-green" title="${escapeHtml(site.dailyBonus || '有')}">${escapeHtml(site.dailyBonus || '有')}</span>
               </div>
             </div>
           </div>
@@ -317,7 +316,7 @@
               onclick="window.handleDirectJump('${escapeHtml(site.affCode || '')}', '${escapeHtml(site.name)}')"
               title="直达注册页面"
             >
-              <span>🚀 立即直达领福利</span>
+              <span>🚀 直达领福利</span>
             </a>
 
             ${site.affCode ? `
@@ -349,104 +348,6 @@
     const now = new Date();
     const diffDays = (now - itemDate) / (1000 * 60 * 60 * 24);
     return diffDays <= 7;
-  }
-
-  // ===== 大招二：四大中转站精准选型/避坑对比表渲染 =====
-  function renderComparisonTable() {
-    if (!els.comparisonTableBody) return;
-
-    const tableData = [
-      {
-        id: "gorouter",
-        name: "GoRouter",
-        badge: "🔥 真实耐用王",
-        models: ["gpt-5.6-sol", "claude-opus-5", "deepseek-r1"],
-        rate: "1:1 真实无虚标",
-        isReal: true,
-        bestFor: "Cursor / VSCode / 极速编程与高频调用",
-        rating: "★★★★★",
-        link: "https://gorouter.app/sign-up?aff=ekWb",
-        affCode: "ekWb",
-        highlight: true
-      },
-      {
-        id: "agentrouter",
-        name: "AgentRouter",
-        badge: "👑 综合旗舰",
-        models: ["claude-opus-5", "gpt-5.6-sol", "全模型"],
-        rate: "官方标准比例",
-        isReal: false,
-        bestFor: "Claude 超长文本深度推理 / 全能日常",
-        rating: "★★★★★",
-        link: "https://agentrouter.org/register?aff=WTR4",
-        affCode: "WTR4",
-        highlight: false
-      },
-      {
-        id: "seekai",
-        name: "SeekAi",
-        badge: "💎 每日高额续期",
-        models: ["deepseek-r1", "gpt-5.6-sol"],
-        rate: "日常高性价比",
-        isReal: false,
-        bestFor: "DeepSeek 深度思考 / 每日高额签到白嫖",
-        rating: "★★★★★",
-        link: "https://seekai.cc/sign-up?aff=1PrI",
-        affCode: "1PrI",
-        highlight: false
-      },
-      {
-        id: "tabitoken",
-        name: "TaBiToken",
-        badge: "🔮 多模态生图",
-        models: ["gpt-5.6-sol", "claude-opus-5", "生图"],
-        rate: "大额度高并发",
-        isReal: false,
-        bestFor: "多模态解析 / 视觉生图 / 万级并发",
-        rating: "★★★★☆",
-        link: "https://tabitoken.com/sign-up?aff=DgIc",
-        affCode: "DgIc",
-        highlight: false
-      }
-    ];
-
-    els.comparisonTableBody.innerHTML = tableData.map(row => `
-      <tr class="${row.highlight ? 'highlight-row' : ''}">
-        <td>
-          <div class="table-site-cell">
-            <span>${escapeHtml(row.name)}</span>
-            <span class="table-site-badge">${escapeHtml(row.badge)}</span>
-          </div>
-        </td>
-        <td>
-          <div class="table-models-cell">
-            ${row.models.map(m => `<span>• ${escapeHtml(m)}</span>`).join('')}
-          </div>
-        </td>
-        <td>
-          <span class="table-rate-tag ${row.isReal ? 'real' : ''}">
-            ${row.isReal ? '⚡ 1:1 无倍率虚标 (最耐用)' : '标准倍率'}
-          </span>
-        </td>
-        <td>
-          <span style="font-weight:600; color: var(--text-primary);">${escapeHtml(row.bestFor)}</span>
-        </td>
-        <td>
-          <span class="table-star-rating">${row.rating}</span>
-        </td>
-        <td>
-          <a 
-            href="${escapeHtml(row.link)}" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="btn-table-action ${row.highlight ? 'urgent' : ''}"
-            onclick="window.handleDirectJump('${escapeHtml(row.affCode)}', '${escapeHtml(row.name)}')"
-          >
-            🚀 领福利
-          </a>
-        </td>
-      </tr>
-    `).join('');
   }
 
   // ===== 客户端配置教程 Tab 逻辑 =====
@@ -687,7 +588,6 @@
     renderStats();
     renderFilterTabs();
     renderCards();
-    renderComparisonTable();
     renderClientGuides('cherry');
     initFAQ();
   }
