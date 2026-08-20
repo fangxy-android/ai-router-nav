@@ -134,7 +134,7 @@
         </div>
       </section>
 
-      <!-- 核心卡片列表 -->
+      <!-- 核心卡片列表 (2x2 对称排版) -->
       <section class="main-container">
         <div class="cards-grid" id="cardsContainer">
           <!-- 由 js/app.js 动态渲染 -->
@@ -148,7 +148,7 @@
         </div>
       </section>
 
-      <!-- 大招二：四大中转站精准选型/避坑对比表 (Comparison Section) -->
+      <!-- 四大中转站选型与避坑真实对比表 (完全静态嵌入，绝不白屏变形) -->
       <section class="comparison-section" id="comparison-section">
         <div class="comparison-card">
           <div class="comparison-header">
@@ -160,16 +160,154 @@
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th>中转站点</th>
-                  <th>支持王牌模型</th>
-                  <th>真实扣费与耐用度</th>
-                  <th>最适应用途</th>
-                  <th>综合推荐指数</th>
-                  <th>专属直达</th>
+                  <th style="width: 18%;">中转站点</th>
+                  <th style="width: 22%;">支持王牌模型</th>
+                  <th style="width: 20%;">真实扣费与耐用度</th>
+                  <th style="width: 22%;">最适应用途</th>
+                  <th style="width: 10%;">综合推荐</th>
+                  <th style="width: 8%; text-align: center;">专属直达</th>
                 </tr>
               </thead>
               <tbody id="comparisonTableBody">
-                <!-- 由 js/app.js 动态渲染 -->
+                <tr class="highlight-row">
+                  <td>
+                    <div class="table-site-cell">
+                      <span>GoRouter</span>
+                      <span class="table-site-badge">🔥 真实耐用王</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table-models-cell">
+                      <span>• gpt-5.6-sol</span>
+                      <span>• claude-opus-5</span>
+                      <span>• deepseek-r1</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="table-rate-tag real">⚡ 1:1 真实无虚标 (最耐用)</span>
+                  </td>
+                  <td>
+                    <span style="font-weight:700; color: var(--text-primary);">Cursor / VS Code / 极速编程首选</span>
+                  </td>
+                  <td>
+                    <span class="table-star-rating">★★★★★</span>
+                  </td>
+                  <td style="text-align: center;">
+                    <a 
+                      href="https://gorouter.app/sign-up?aff=ekWb" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="btn-table-action urgent"
+                      onclick="window.handleDirectJump('ekWb', 'GoRouter')"
+                    >
+                      🚀 领福利
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-site-cell">
+                      <span>AgentRouter</span>
+                      <span class="table-site-badge" style="background: rgba(99, 102, 241, 0.15); color: #818cf8; border-color: rgba(99, 102, 241, 0.3);">👑 综合旗舰</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table-models-cell">
+                      <span>• claude-opus-5</span>
+                      <span>• gpt-5.6-sol</span>
+                      <span>• 全模型支持</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="table-rate-tag">官方标准比例</span>
+                  </td>
+                  <td>
+                    <span style="font-weight:700; color: var(--text-primary);">Claude 超长文本深度推理 / 全能日常</span>
+                  </td>
+                  <td>
+                    <span class="table-star-rating">★★★★★</span>
+                  </td>
+                  <td style="text-align: center;">
+                    <a 
+                      href="https://agentrouter.org/register?aff=WTR4" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="btn-table-action"
+                      onclick="window.handleDirectJump('WTR4', 'AgentRouter')"
+                    >
+                      🚀 领福利
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-site-cell">
+                      <span>SeekAi</span>
+                      <span class="table-site-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3);">💎 每日高额续期</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table-models-cell">
+                      <span>• deepseek-r1</span>
+                      <span>• gpt-5.6-sol</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="table-rate-tag">日常高性价比</span>
+                  </td>
+                  <td>
+                    <span style="font-weight:700; color: var(--text-primary);">DeepSeek 深度思考 / 每日高额签到白嫖</span>
+                  </td>
+                  <td>
+                    <span class="table-star-rating">★★★★★</span>
+                  </td>
+                  <td style="text-align: center;">
+                    <a 
+                      href="https://seekai.cc/sign-up?aff=1PrI" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="btn-table-action"
+                      onclick="window.handleDirectJump('1PrI', 'SeekAi')"
+                    >
+                      🚀 领福利
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-site-cell">
+                      <span>TaBiToken</span>
+                      <span class="table-site-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border-color: rgba(236, 72, 153, 0.3);">🔮 多模态生图</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table-models-cell">
+                      <span>• gpt-5.6-sol</span>
+                      <span>• claude-opus-5</span>
+                      <span>• Midjourney / Flux</span>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="table-rate-tag">大额度高并发</span>
+                  </td>
+                  <td>
+                    <span style="font-weight:700; color: var(--text-primary);">多模态解析 / 视觉生图 / 万级并发</span>
+                  </td>
+                  <td>
+                    <span class="table-star-rating">★★★★☆</span>
+                  </td>
+                  <td style="text-align: center;">
+                    <a 
+                      href="https://tabitoken.com/sign-up?aff=DgIc" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="btn-table-action"
+                      onclick="window.handleDirectJump('DgIc', 'TaBiToken')"
+                    >
+                      🚀 领福利
+                    </a>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
