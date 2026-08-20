@@ -1,5 +1,5 @@
 /**
- * AI 公益中转站导航 - 核心应用逻辑 (4卡一行极简版)
+ * AI 公益中转站导航 - 核心应用逻辑 (2x2 旗舰高颜值打卡版)
  * 纯原生现代化 ES6+ 编写，轻量高效，零外部依赖
  */
 
@@ -28,6 +28,8 @@
     sortSelect: document.getElementById('sortSelect'),
     cardsContainer: document.getElementById('cardsContainer'),
     emptyState: document.getElementById('emptyState'),
+    checklistProgressFill: document.getElementById('checklistProgressFill'),
+    checklistProgressText: document.getElementById('checklistProgressText'),
     toastContainer: document.getElementById('toastContainer'),
     backToTopBtn: document.getElementById('backToTopBtn'),
     clientGuideTabs: document.getElementById('clientGuideTabs'),
@@ -41,6 +43,7 @@
     await loadData();
     bindEvents();
     renderAll();
+    updateChecklistProgress();
     checkNoticeModal();
   }
 
@@ -81,6 +84,36 @@
     if (!els.themeToggleBtn) return;
     els.themeToggleBtn.innerHTML = theme === 'dark' ? '🌙' : '☀️';
     els.themeToggleBtn.setAttribute('title', theme === 'dark' ? '切换为浅色模式' : '切换为深色模式');
+  }
+
+  // ===== 打卡进度条更新 =====
+  function updateChecklistProgress() {
+    if (!els.checklistProgressFill || !els.checklistProgressText) return;
+    const visited = JSON.parse(localStorage.getItem('visited_sites') || '[]');
+    const total = SITES.length || 4;
+    const count = visited.length;
+    const percent = Math.min(100, Math.round((count / total) * 100));
+
+    els.checklistProgressFill.style.width = `${percent}%`;
+    if (count >= total) {
+      els.checklistProgressText.innerHTML = `🎉 已全部解锁 (${count}/${total}) · $495 到手！`;
+      els.checklistProgressText.style.color = 'var(--accent-emerald)';
+    } else {
+      els.checklistProgressText.innerHTML = `已解锁 ${count}/${total} 站 · 进度 ${percent}%`;
+      els.checklistProgressText.style.color = 'var(--accent-cyan)';
+    }
+  }
+
+  function recordSiteVisited(siteId) {
+    let visited = JSON.parse(localStorage.getItem('visited_sites') || '[]');
+    if (!visited.includes(siteId)) {
+      visited.push(siteId);
+      localStorage.setItem('visited_sites', JSON.stringify(visited));
+      updateChecklistProgress();
+      if (visited.length === SITES.length) {
+        showToast('🏆 太棒了！您已解锁全部 4 大中转站，$495 免费额度已拉满！');
+      }
+    }
   }
 
   // ===== 统计看板渲染 =====
@@ -221,7 +254,7 @@
     return list;
   }
 
-  // ===== 卡片渲染 =====
+  // ===== 卡片渲染 (2x2 两排宽敞布局) =====
   function renderCards() {
     if (!els.cardsContainer) return;
 
@@ -289,19 +322,19 @@
               ${tags}
             </div>
 
-            <!-- 福利拆解展示 -->
+            <!-- 福利拆解展示 (大数字宽敞明晰) -->
             <div class="reward-breakdown-grid">
               <div class="reward-cell">
                 <span class="reward-cell-label">注册即赠</span>
-                <span class="reward-cell-value highlight-cyan" title="${escapeHtml(site.registerBonus || '$0')}">${escapeHtml(site.registerBonus || '$0')}</span>
+                <span class="reward-cell-value highlight-cyan">${escapeHtml(site.registerBonus || '$0')}</span>
               </div>
               <div class="reward-cell">
-                <span class="reward-cell-label">专属加赠</span>
-                <span class="reward-cell-value highlight-amber" title="${escapeHtml(site.inviteBonus || '赠送')}">${escapeHtml(site.inviteBonus || '赠送')}</span>
+                <span class="reward-cell-label">专属邀请加赠</span>
+                <span class="reward-cell-value highlight-amber">${escapeHtml(site.inviteBonus || '赠送')}</span>
               </div>
               <div class="reward-cell">
                 <span class="reward-cell-label">每日签到</span>
-                <span class="reward-cell-value highlight-green" title="${escapeHtml(site.dailyBonus || '有')}">${escapeHtml(site.dailyBonus || '有')}</span>
+                <span class="reward-cell-value highlight-green">${escapeHtml(site.dailyBonus || '有')}</span>
               </div>
             </div>
           </div>
@@ -313,10 +346,10 @@
               target="_blank" 
               rel="noopener noreferrer" 
               class="btn-primary-jump ${site.urgent ? 'urgent-glow' : ''}"
-              onclick="window.handleDirectJump('${escapeHtml(site.affCode || '')}', '${escapeHtml(site.name)}')"
+              onclick="window.handleDirectJump('${escapeHtml(site.affCode || '')}', '${escapeHtml(site.name)}', '${escapeHtml(site.id)}')"
               title="直达注册页面"
             >
-              <span>🚀 直达领福利</span>
+              <span>🚀 立即直达领福利</span>
             </a>
 
             ${site.affCode ? `
@@ -467,8 +500,11 @@
     }
   };
 
-  // ===== 剪贴板复制 & 直达辅助 =====
-  window.handleDirectJump = function (code, name) {
+  // ===== 剪贴板复制 & 直达打卡辅助 =====
+  window.handleDirectJump = function (code, name, siteId) {
+    if (siteId) {
+      recordSiteVisited(siteId);
+    }
     if (code) {
       try {
         navigator.clipboard.writeText(code);
