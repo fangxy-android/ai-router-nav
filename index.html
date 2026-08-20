@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 公益中转导航 · 精选免费额度与专属邀请码推荐</title>
+  <meta name="description" content="精选高额度公益 AI 中转站推荐，支持 Claude 3.7、GPT-4o、DeepSeek-R1 等全模型。注册即送免费额度，配合专属邀请码额外享加赠福利！">
+  <meta name="keywords" content="AI公益站, 免费AI中转, OpenAI中转, Claude中转, DeepSeek免费额度, 邀请码, Cherry Studio配置">
+  <meta name="theme-color" content="#0a0e17">
+  
+  <!-- 引入样式表 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 背景微光光晕 (Ambient Glow Mesh) -->
+  <div class="bg-glow-mesh" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- 顶部置顶通知条 -->
+    <aside class="global-notice-bar" id="globalNoticeBar">
+      <span class="notice-pill">福利公告</span>
+      <span id="globalNoticeText">新站上线！所有站点通过专属链接注册均可领取额外加赠礼包。</span>
+      <span class="notice-link-btn" onclick="window.showNoticeModal()">查看详情 &raquo;</span>
+      <button class="notice-close-btn" onclick="document.getElementById('globalNoticeBar').style.display='none'" title="关闭此通知">&times;</button>
+    </aside>
+
+    <!-- 顶栏导航 (Navbar) -->
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="brand-logo-icon">⚡</div>
+          <div class="brand-text-wrap">
+            <span class="brand-title">AI 公益中转导航</span>
+            <span class="brand-subtitle">免费额度 · 极速聚合</span>
+          </div>
+        </div>
+
+        <nav class="nav-actions">
+          <a href="#client-guide" class="nav-btn">
+            <span>📖 客户端配置</span>
+          </a>
+          <a href="#faq" class="nav-btn">
+            <span>❓ 常见问题</span>
+          </a>
+          <button class="nav-btn" onclick="window.showNoticeModal()" title="查看站长公告">
+            <span>📢 公告</span>
+          </button>
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="切换深色/浅色主题">
+            🌙
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主体区域 -->
+    <main>
+      <!-- Hero 模块 -->
+      <section class="hero-section">
+        <div class="hero-badge">
+          <span class="badge-pulse-dot"></span>
+          <span>实时收录 · 2026 精选高额度可用站点</span>
+        </div>
+
+        <h1 class="hero-title">免费领取 AI 额度 · 公益中转站精选导航</h1>
+
+        <p class="hero-sub">
+          收录全网优质、低延迟、高额度的 AI 公益中转站。支持 Claude 3.7 / GPT-4o / DeepSeek-R1 全模型。
+          点击注册即享新手豪华额度，配合专属邀请码额外享受叠加福利！
+        </p>
+
+        <!-- 统计看板 -->
+        <div class="hero-stats-grid" id="heroStats">
+          <!-- 由 js/app.js 动态渲染 -->
+        </div>
+
+        <!-- 白嫖秘籍提示 -->
+        <div class="hero-guide-banner">
+          <span class="guide-badge">💡 站长秘籍</span>
+          <span class="guide-text">
+            使用本站专属链接注册可额外激活 <span class="guide-highlight">+$20~$25</span> 专属加赠，每天坚持签到即可实现「免费无限续期」！
+          </span>
+        </div>
+      </section>
+
+      <!-- 筛选与控制栏 -->
+      <section class="controls-section">
+        <div class="controls-card">
+          <!-- 标签分类 -->
+          <div class="filter-tabs" id="filterTabs">
+            <!-- 由 js/app.js 动态渲染 -->
+          </div>
+
+          <!-- 工具组：搜索 + 排序 -->
+          <div class="tools-group">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input 
+                type="text" 
+                class="search-input" 
+                id="searchInput" 
+                placeholder="搜索站点 / 标签 / 邀请码... (按 / 聚焦)"
+                autocomplete="off"
+              >
+              <button class="search-clear-btn" id="searchClearBtn" title="清空搜索">&times;</button>
+            </div>
+
+            <div class="sort-select-wrap">
+              <select class="sort-select" id="sortSelect" title="选择排序方式">
+                <option value="recommend">⭐ 综合推荐排序</option>
+                <option value="bonus-desc">💰 注册奖励 (从高到低)</option>
+                <option value="daily-desc">⚡ 签到福利 (从高到低)</option>
+                <option value="date-desc">🕒 最新收录优先</option>
+              </select>
+              <span class="sort-select-icon">▼</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 核心卡片列表 -->
+      <section class="main-container">
+        <div class="cards-grid" id="cardsContainer">
+          <!-- 由 js/app.js 动态渲染 -->
+        </div>
+
+        <!-- 空搜索状态 -->
+        <div class="empty-state-box" id="emptyState" style="display: none;">
+          <div class="empty-state-icon">🔎</div>
+          <div class="empty-state-title">未找到匹配的公益中转站</div>
+          <p>换个关键词试试，或者点击上方「全部推荐」重置筛选条件。</p>
+        </div>
+      </section>
+
+      <!-- 常用客户端配置指南 -->
+      <section class="client-guide-section" id="client-guide">
+        <div class="guide-panel-card">
+          <div class="guide-panel-header">
+            <h2 class="guide-panel-title">🚀 常用 AI 客户端快速配置教程</h2>
+            <p class="guide-panel-sub">拿到中转站的 API Key 和 Base URL 后，按以下步骤即可在本地无缝调用全套大模型</p>
+          </div>
+
+          <!-- 客户端切换 Tabs -->
+          <div class="client-tabs-nav" id="clientGuideTabs">
+            <!-- 动态生成 -->
+          </div>
+
+          <!-- 配置步骤内容 -->
+          <div class="client-guide-content" id="clientGuideContent">
+            <!-- 动态生成 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 常见问题 FAQ -->
+      <section class="faq-section" id="faq">
+        <div class="faq-title-wrap">
+          <h2 class="faq-main-title">❓ 常见问题解答 (FAQ)</h2>
+          <p class="guide-panel-sub">快速了解公益中转站原理、使用技巧与安全指南</p>
+        </div>
+
+        <div class="faq-accordion" id="faqAccordion">
+          <div class="faq-item open">
+            <div class="faq-question">
+              <span>1. 什么是 AI 公益中转站？与官方原版有什么区别？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              公益中转站是由站长或技术社区搭建的 OpenAI / Anthropic 兼容 API 聚合转发平台。它们通常聚合了多家上游算力，用户无需自备境外信用卡或折腾复杂的海外网络，只需使用中转站提供的 API Key 即可在任何客户端（如 Cherry Studio、NextChat、Cursor 等）中调用 Claude 3.7、GPT-4o、DeepSeek-R1 等顶级模型，且注册和每日签到都有大量免费额度赠送。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>2. 为什么要通过本站的专属链接注册？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              中转平台通常为推广设有专属邀请奖励机制。如果你直接在浏览器打开官网注册，只能获得基础赠送；而通过本站整理的专属邀请链接（带专属 aff 码）注册，系统会自动识别并额外加赠 $20~$25 的体验额度，同时也能支持本站持续维护更新！
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>3. 如何做到长期不花钱白嫖 AI 额度？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              1. **矩阵注册**：将本站收录的 4 个站点全部注册一遍，立即到手合计超过 $400 的新手大礼包！<br>
+              2. **每日签到**：大部分站点均提供每日签到赠送（如 AgentRouter、SeekAi 每天可领 $20~$25），每天花 10 秒点一次签到，即可维持源源不断的日常对话额度。<br>
+              3. **合理配置模型**：日常闲聊或快速问答选用高性价比的 DeepSeek 或轻量模型，攻坚复杂编程与学术推理时调用 Claude 3.7 Sonnet 或 GPT-4o。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>4. 使用公益站有安全风险吗？有什么注意事项？</span>
+              <span class="faq-arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+              使用中转站调用 API 时，请求会经由中转服务器转发至上游官方。请遵守以下原则：<br>
+              • 严禁在对话中发送真实的个人银行卡、身份证、公司敏感业务机密等隐私信息；<br>
+              • 妥善保管好个人生成的 <code>sk-xxxx</code> API 密钥，不要泄露在公开 GitHub 代码库中；<br>
+              • 本站仅为公益信息聚合与邀请推荐，不参与任何第三方的商业运营。
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 (Footer) -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p class="footer-disclaimer">
+          ⚠️ <strong>免责声明：</strong>本站仅做网络公开公益中转站与专属邀请码信息整理推荐，不参与任何中转站的实际运营与接口售卖，不对第三方站点的服务稳定性、额度政策变更或数据安全承担责任。请严格遵守相关法律法规及各平台使用规范。
+        </p>
+        <p class="footer-copyright">
+          © 2026 AI 公益中转导航 · 精心打造 · 站点失效或合作请联系站长
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- 浮动返回顶部按钮 -->
+  <button class="back-to-top-btn" id="backToTopBtn" title="返回顶部">
+    ▲
+  </button>
+
+  <!-- 站长公告弹窗 (Modal) -->
+  <div class="modal-overlay" id="noticeModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title" id="modalNoticeTitle">📢 站内福利公告</div>
+        <button class="modal-close-btn" onclick="window.closeNoticeModal(false)">&times;</button>
+      </div>
+      <div class="modal-body" id="modalNoticeBody">
+        <!-- 动态生成 -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="window.closeNoticeModal(false)">本次关闭</button>
+        <button class="btn-primary" onclick="window.closeNoticeModal(true)">我知道了 (不再弹窗)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 消息通知容器 -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- 数据脚本与业务逻辑 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
