@@ -90,13 +90,13 @@
   function updateChecklistProgress() {
     if (!els.checklistProgressFill || !els.checklistProgressText) return;
     const visited = JSON.parse(localStorage.getItem('visited_sites') || '[]');
-    const total = SITES.length || 4;
+    const total = SITES.length || 5;
     const count = visited.length;
     const percent = Math.min(100, Math.round((count / total) * 100));
 
     els.checklistProgressFill.style.width = `${percent}%`;
     if (count >= total) {
-      els.checklistProgressText.innerHTML = `🎉 已全部解锁 (${count}/${total}) · $495 到手！`;
+      els.checklistProgressText.innerHTML = `🎉 已全部解锁 (${count}/${total}) · 启动金已到手！`;
       els.checklistProgressText.style.color = 'var(--accent-emerald)';
     } else {
       els.checklistProgressText.innerHTML = `已解锁 ${count}/${total} 站 · 进度 ${percent}%`;
@@ -110,8 +110,8 @@
       visited.push(siteId);
       localStorage.setItem('visited_sites', JSON.stringify(visited));
       updateChecklistProgress();
-      if (visited.length === SITES.length) {
-        showToast('🏆 太棒了！您已解锁全部 4 大中转站，$495 免费额度已拉满！');
+      if (visited.length >= SITES.length) {
+        showToast(`🏆 太棒了！您已解锁全部 ${SITES.length} 大中转站，全部免费额度已拉满！`);
       }
     }
   }

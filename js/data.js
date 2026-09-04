@@ -8,8 +8,8 @@ window.DEFAULT_CONFIG = {
   heroTitle: "⚡ 免费领 AI 额度 · 旗舰中转站精选导航",
   heroSub: "全网精选优质高额度公益中转站，全面支持 gpt-5.6-sol / claude-opus-5 / DeepSeek-R1 全系列旗舰大模型。点击注册即送丰厚额度，使用专属邀请码更有额外加赠！",
   noticeTitle: "📢 站长福利提示 & 旗舰模型上线",
-  noticeContent: "1. 全站收录中转站已全面接入 gpt-5.6-sol、claude-opus-5 等超旗舰模型！\n2. 强烈建议通过本站专属链接注册，可额外激活 $20~$25 专属邀请加赠礼包！\n3. 每日坚持签到，可无限白嫖日常使用额度。\n4. 推荐将 4 个站点全部注册并配置到 Cherry Studio、NextChat、Cursor 轮换使用，额度永不枯竭！",
-  noticeVersion: 2,
+  noticeContent: "1. 全站收录中转站已全面接入 gpt-5.6-sol、claude-opus-5 等超旗舰模型！\n2. 强烈建议通过本站专属链接注册，可额外激活 $20~$25 专属邀请加赠礼包！\n3. 每日坚持签到，可无限白嫖日常使用额度。\n4. 推荐将 5 个站点全部注册并配置到 Cherry Studio、NextChat、Cursor 轮换使用，额度永不枯竭！",
+  noticeVersion: 3,
   contactUrl: "https://t.me/",
   updatedAt: "2026-08-20"
 };
@@ -106,5 +106,28 @@ window.DEFAULT_SITES = [
     icon: "🔮",
     color: "linear-gradient(135deg, #ec4899, #f43f5e)",
     date: "2026-08-20"
+  },
+  {
+    id: "kktoken",
+    name: "KKtoken AI",
+    domain: "kktoken.cc",
+    link: "https://kktoken.cc/sign-up?aff=F4qL",
+    affCode: "F4qL",
+    registerBonus: "$100",
+    inviteBonus: "+$20 专属加赠",
+    dailyBonus: "约 $22 / 每日签到",
+    bonusValue: 120,
+    dailyValue: 22,
+    tags: ["每日签到", "GitHub登录", "gpt-5.6-sol", "claude-opus-5", "纯净防刷"],
+    models: ["gpt-5.6-sol", "claude-opus-5", "deepseek-r1"],
+    desc: "支持 GitHub 授权一键登录，纯净防刷高可用中转。全面支持 gpt-5.6-sol / claude-opus-5 旗舰模型，每日签到领约 $22 稳定续期。",
+    recommend: "GitHub 快捷登录免手机邮箱验证，每日签到稳定领 $22，节点纯净响应极快，主力备用必备！",
+    status: "active",
+    badge: "🛡️ 纯净高速",
+    pinned: false,
+    urgent: false,
+    icon: "🛡️",
+    color: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+    date: "2026-09-04"
   }
 ];
