@@ -12,6 +12,29 @@
   },
   "sites": [
     {
+      "id": "kktoken",
+      "name": "KKtoken AI",
+      "domain": "kktoken.cc",
+      "link": "https://kktoken.cc/sign-up?aff=F4qL",
+      "affCode": "F4qL",
+      "registerBonus": "$100",
+      "inviteBonus": "+$20 专属加赠",
+      "dailyBonus": "约 $22 / 每日签到",
+      "bonusValue": 120,
+      "dailyValue": 22,
+      "tags": ["每日签到", "GitHub登录", "gpt-5.6-sol", "claude-opus-5", "纯净防刷"],
+      "models": ["gpt-5.6-sol", "claude-opus-5", "deepseek-r1"],
+      "desc": "支持 GitHub 授权一键免密登录，纯净防刷高可用中转。全面支持 gpt-5.6-sol / claude-opus-5 旗舰模型，每日签到领约 $22 稳定续期。",
+      "recommend": "最新收录力荐！GitHub 快捷登录免手机邮箱验证，每日签到稳定领 $22，节点纯净响应极快，主力备用必备！",
+      "status": "active",
+      "badge": "🔥 最新收录 · 纯净高速",
+      "pinned": true,
+      "urgent": true,
+      "icon": "🛡️",
+      "color": "linear-gradient(135deg, #0ea5e9, #6366f1)",
+      "date": "2026-09-04"
+    },
+    {
       "id": "gorouter",
       "name": "GoRouter",
       "domain": "gorouter.app",
@@ -102,29 +125,6 @@
       "icon": "🔮",
       "color": "linear-gradient(135deg, #ec4899, #f43f5e)",
       "date": "2026-08-20"
-    },
-    {
-      "id": "kktoken",
-      "name": "KKtoken AI",
-      "domain": "kktoken.cc",
-      "link": "https://kktoken.cc/sign-up?aff=F4qL",
-      "affCode": "F4qL",
-      "registerBonus": "$100",
-      "inviteBonus": "+$20 专属加赠",
-      "dailyBonus": "约 $22 / 每日签到",
-      "bonusValue": 120,
-      "dailyValue": 22,
-      "tags": ["每日签到", "GitHub登录", "gpt-5.6-sol", "claude-opus-5", "纯净防刷"],
-      "models": ["gpt-5.6-sol", "claude-opus-5", "deepseek-r1"],
-      "desc": "支持 GitHub 授权一键登录，纯净防刷高可用中转。全面支持 gpt-5.6-sol / claude-opus-5 旗舰模型，每日签到领约 $22 稳定续期。",
-      "recommend": "GitHub 快捷登录免手机邮箱验证，每日签到稳定领 $22，节点纯净响应极快，主力备用必备！",
-      "status": "active",
-      "badge": "🛡️ 纯净高速",
-      "pinned": false,
-      "urgent": false,
-      "icon": "🛡️",
-      "color": "linear-gradient(135deg, #0ea5e9, #6366f1)",
-      "date": "2026-09-04"
     }
   ]
 }

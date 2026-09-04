@@ -233,9 +233,7 @@
         case 'recommend':
           if (a.pinned && !b.pinned) return -1;
           if (!a.pinned && b.pinned) return 1;
-          if (a.urgent && !b.urgent) return -1;
-          if (!a.urgent && b.urgent) return 1;
-          return (b.bonusValue || 0) - (a.bonusValue || 0);
+          return 0; // 遵循站长精选配置序列 (首位即第1位)
 
         case 'bonus-desc':
           return (b.bonusValue || 0) - (a.bonusValue || 0);
